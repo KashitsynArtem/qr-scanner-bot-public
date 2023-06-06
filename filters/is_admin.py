@@ -10,7 +10,9 @@ class AdminFilter(BoundFilter):
         self.is_admin = is_admin
 
     async def check(self, message: types.Message) -> bool:
-        return int(message.from_user.id) == int(os.environ.get('ID_ADMIN'))
+        if id_admin := os.environ.get('ID_ADMIN'):
+            return int(message.from_user.id) == int(id_admin)
+        return True
 
 
 

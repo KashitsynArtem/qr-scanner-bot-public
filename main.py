@@ -4,20 +4,21 @@ import filters
 import handlers
 from bot import bot, dp
 from aiogram import Dispatcher
+import os
 
 
 logging.basicConfig(level=logging.INFO)
 
 
-async def main(dp: Dispatcher) -> None:
-    filters.setup(dp)
-    handlers.setup(dp)
+async def main(dispatcher: Dispatcher) -> None:
+    filters.setup(dispatcher)
+    handlers.setup(dispatcher)
 
     try:
-        await dp.start_polling()
+        await dispatcher.start_polling()
     finally:
-        await dp.storage.close()
-        await dp.storage.wait_closed()
+        await dispatcher.storage.close()
+        await dispatcher.storage.wait_closed()
         await bot.session.close()
 
 

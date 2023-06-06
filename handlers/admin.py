@@ -6,7 +6,10 @@ from io import BytesIO
 
 
 async def start(message: Message) -> None:
-    await message.answer(text='Hi')
+    await message.answer(text='Hello, Im a QR bot, thats what I can do:\n\n\n'
+                              '• Send your message or link to the bot, and it will create a unique QR code\n\n'
+                              '• Send a image or photo with QR code or barcode to the bot, and it will instantly '
+                              'decode the information and display it for you.')
     await message.delete()
 
 
@@ -16,16 +19,17 @@ async def read_qr(message: Message) -> None:
     res = await qr_scan(buf)
 
     if res:
-        await bot.send_message(message.from_user.id, text=f'{res}')
+        await bot.send_message(message.from_user.id, text=f'On QR: {res}')
     else:
-        await bot.send_message(message.from_user.id, text=f'Nope')
+        await bot.send_message(message.from_user.id, text=f'Image without QR')
 
 
 async def get_qr(message: Message) -> None:
     user_id: int = message.from_user.id
-    buf = await qr_gen(message.text)
+    msg_text: str = message.text
+    buf = await qr_gen(msg_text)
     await bot.send_photo(user_id,
-                         caption=f'QR:',
+                         caption=f'On QR: {msg_text}',
                          photo=InputFile(buf, f'{str(user_id)}.png'))
 
 
