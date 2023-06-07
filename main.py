@@ -4,7 +4,6 @@ import filters
 import handlers
 from bot import bot, dp
 from aiogram import Dispatcher
-import os
 
 
 logging.basicConfig(level=logging.INFO)
