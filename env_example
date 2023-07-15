@@ -1,5 +1,5 @@
 #get bot token: https://t.me/botfather
-BOT_API_TOKEN='YOUR TELEGRAM ID'
+BOT_API_TOKEN='BOT TOKEN'
 
 #if you want to limit access: input your telegram user id
 ID_ADMIN='your telegram user id'
